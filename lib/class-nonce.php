@@ -1,6 +1,8 @@
 <?php
 /**
  * Nonce generator & validator.
+ *
+ * @package WPDiscourseLogin
  */
 
 namespace WPDiscourseLogin;

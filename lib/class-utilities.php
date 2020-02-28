@@ -2,7 +2,7 @@
 /**
  * Static utility functions used throughout the plugin.
  *
- * @package WPDiscourse
+ * @package WPDiscourseLogin
  */
 
 namespace WPDiscourseLogin\Utilities;

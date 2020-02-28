@@ -1,6 +1,8 @@
 <?php
 /**
  * SSO Client functions
+ *
+ * @package WPDiscourseLogin
  */
 
 namespace WPDiscourseLogin\SSO;
@@ -57,6 +59,8 @@ class SSO {
 
 	/**
 	 * Adds redirects
+	 *
+	 * @param  object $wp the wp_query.
 	 */
 	public function discourse_sso_url_redirect( $wp ) {
 		if ( empty( $wp->query['discourse_sso_new'] ) ) {
