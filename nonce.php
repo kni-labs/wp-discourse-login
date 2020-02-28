@@ -3,9 +3,8 @@
  * Nonce generator & validator.
  */
 
-/**
- * Nonce generator
- */
+namespace WPDiscourseLogin;
+
 class Nonce {
 
 

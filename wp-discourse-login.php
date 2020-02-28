@@ -1,10 +1,10 @@
 <?php
-/*
-Plugin Name: WP Discourse Login
-Description: Allow SSO using Discourse as the provider
-Version: 0.0.1
-Author: Jake Ols
-Author URI: https://ols.engineer
+/**
+ * Plugin Name: WP Discourse Login
+ * Description: Allow SSO using Discourse as the provider
+ * Version: 0.0.1
+ * Author: Jake Ols
+ * Author URI: https://ols.engineer
  *
  * Modified code from the official WP Discourse plugin: https://github.com/discourse/wp-discourse/
  */

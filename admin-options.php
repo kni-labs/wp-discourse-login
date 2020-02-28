@@ -2,6 +2,7 @@
 /**
  * Admin options for WP Discourse Login
  */
+namespace WPDiscourseLogin\Admin;
 
 function wpdlg_register_settings() {
 	add_option( 'wpdlg_discourse_url', 'Discourse URL' );
