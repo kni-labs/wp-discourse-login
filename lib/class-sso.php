@@ -14,6 +14,9 @@ class SSO {
 	 */
 	public function __construct() {
 		add_action( 'init', array( $this, 'parse_request' ), 5 );
+
+		add_filter( 'query_vars', array($this, 'discourse_sso_custom_query_vars') );
+		add_action( 'parse_query', array($this, 'discourse_sso_url_redirect') );
 	}
 
 	/**
@@ -24,14 +27,14 @@ class SSO {
 			return;
 		}
 
-		if ( ! is_valid_signature() ) {
+		if ( ! $this->is_valid_signature() ) {
 			return;
 		}
 
-		$user_id = get_user_id();
+		$user_id = $this->get_user_id();
 
 		if ( is_wp_error( $user_id ) ) {
-			handle_errors( $user_id );
+			$this->handle_errors( $user_id );
 
 			return;
 		}
@@ -94,16 +97,16 @@ class SSO {
 	public function get_user_id() {
 		if ( is_user_logged_in() ) {
 			$user_id  = get_current_user_id();
-			$redirect = get_sso_response( 'return_sso_url' );
+			$redirect = $this->get_sso_response( 'return_sso_url' );
 			if ( get_user_meta( $user_id, get_option( 'wpdlg_discourse_meta' ), true ) ) {
 				wp_safe_redirect( $redirect );
 
 				exit;
 			} else {
-				$discourse_email = get_sso_response( 'email' );
+				$discourse_email = $this->get_sso_response( 'email' );
 				$wp_email        = wp_get_current_user()->user_email;
 				if ( $discourse_email === $wp_email ) {
-					update_user_meta( $user_id, get_option( 'wpdlg_discourse_meta' ), get_sso_response( 'external_id' ) );
+					update_user_meta( $user_id, get_option( 'wpdlg_discourse_meta' ), $this->get_sso_response( 'external_id' ) );
 					wp_safe_redirect( $redirect );
 					exit;
 				} else {
@@ -116,7 +119,7 @@ class SSO {
 			$user_query         = new \WP_User_Query(
 				array(
 					'meta_key'   => get_option( 'wpdlg_discourse_meta' ),
-					'meta_value' => get_sso_response( 'external_id' ),
+					'meta_value' => $this->get_sso_response( 'external_id' ),
 				)
 			);
 			$user_query_results = $user_query->get_results();
@@ -124,9 +127,9 @@ class SSO {
 				$user_password = wp_generate_password( 12, true );
 
 				$user_id = wp_create_user(
-					get_sso_response( 'username' ),
+					$this->get_sso_response( 'username' ),
 					$user_password,
-					get_sso_response( 'email' )
+					$this->get_sso_response( 'email' )
 				);
 				return $user_id;
 			}
@@ -182,7 +185,7 @@ class SSO {
 	 * @return null
 	 */
 	public function auth_user( $user_id ) {
-		$query = get_sso_response();
+		$query = $this->get_sso_response();
 		wp_set_current_user( $user_id, $query['username'] );
 		wp_set_auth_cookie( $user_id );
 		$user = wp_get_current_user();
@@ -220,7 +223,7 @@ class SSO {
 	 * @return int|\WP_Error integer if the update was successful, WP_Error otherwise.
 	 */
 	public function update_user( $user_id ) {
-		$query = get_sso_response();
+		$query = $this->get_sso_response();
 		$nonce = Nonce::get_instance()->verify( $query['nonce'], '_discourse_sso' );
 		if ( ! $nonce ) {
 			return new \WP_Error( 'expired_nonce' );
@@ -255,9 +258,9 @@ class SSO {
 	 * @return boolean
 	 */
 	public function is_valid_signature() {
-		$sso = urldecode( get_sso_response( 'raw' ) );
+		$sso = urldecode( $this->get_sso_response( 'raw' ) );
 
-		return hash_hmac( 'sha256', $sso, get_option( 'wpdlg_discourse_secret' ) ) === get_sso_signature();
+		return hash_hmac( 'sha256', $sso, get_option( 'wpdlg_discourse_secret' ) ) === $this->get_sso_signature();
 	}
 
 	/**

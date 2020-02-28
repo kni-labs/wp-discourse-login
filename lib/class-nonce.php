@@ -5,7 +5,7 @@
  * @package WPDiscourseLogin
  */
 
-namespace WPDiscourseLogin;
+namespace WPDiscourseLogin\SSO;
 
 class Nonce {
 
