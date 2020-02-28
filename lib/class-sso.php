@@ -15,8 +15,8 @@ class SSO {
 	public function __construct() {
 		add_action( 'init', array( $this, 'parse_request' ), 5 );
 
-		add_filter( 'query_vars', array($this, 'discourse_sso_custom_query_vars') );
-		add_action( 'parse_query', array($this, 'discourse_sso_url_redirect') );
+		add_filter( 'query_vars', array( $this, 'discourse_sso_custom_query_vars' ) );
+		add_action( 'parse_query', array( $this, 'discourse_sso_url_redirect' ) );
 	}
 
 	/**
