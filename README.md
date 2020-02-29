@@ -2,6 +2,8 @@
 
 Add Discourse as an SSO Provider for Wordpress
 
+![](https://github.com/kni-labs/wp-discourse-login/workflows/PHP%20Composer/badge.svg)
+
 ### Installing
 
 Clone repository
