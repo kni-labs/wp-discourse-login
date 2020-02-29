@@ -1,5 +1,6 @@
 <?php
 /**
+ *
  * Static utility functions used throughout the plugin.
  *
  * @package WPDiscourseLogin
@@ -9,8 +10,6 @@ namespace WPDiscourseLogin\Utilities;
 
 /**
  * Class Utilities
- *
- * @package WPDiscourse
  */
 class Utilities {
 

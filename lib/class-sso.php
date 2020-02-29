@@ -1,12 +1,15 @@
 <?php
 /**
- * SSO Client functions
+ *
+ * SSO client
+ */
+namespace WPDiscourseLogin\SSO;
+
+/**
+ * Class SSO
  *
  * @package WPDiscourseLogin
  */
-
-namespace WPDiscourseLogin\SSO;
-
 class SSO {
 
 

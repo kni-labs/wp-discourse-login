@@ -1,12 +1,15 @@
 <?php
 /**
- * Nonce generator & validator.
+ *
+ * Nonce generator and validator
+ */
+namespace WPDiscourseLogin\SSO;
+
+/**
+ * Nonce class
  *
  * @package WPDiscourseLogin
  */
-
-namespace WPDiscourseLogin\SSO;
-
 class Nonce {
 
 
