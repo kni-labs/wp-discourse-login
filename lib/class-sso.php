@@ -9,6 +9,8 @@ namespace WPDiscourseLogin\SSO;
 
 class SSO {
 
+
+
 	/**
 	 * Constructor
 	 */
@@ -52,7 +54,7 @@ class SSO {
 	/**
 	 * Adds to query variabls
 	 *
-	 * @param  array $vars query vars.
+	 * @param array $vars query vars.
 	 */
 	public function discourse_sso_custom_query_vars( $vars ) {
 		$vars[] = 'discourse_sso_new'; // naming?
@@ -63,7 +65,7 @@ class SSO {
 	/**
 	 * Adds redirects
 	 *
-	 * @param  object $wp the wp_query.
+	 * @param object $wp the wp_query.
 	 */
 	public function discourse_sso_url_redirect( $wp ) {
 		if ( empty( $wp->query['discourse_sso_new'] ) ) {
@@ -204,7 +206,7 @@ class SSO {
 	/**
 	 * Handle Login errors
 	 *
-	 * @param  \WP_Error $error WP_Error object.
+	 * @param \WP_Error $error WP_Error object.
 	 */
 	public function handle_errors( $error ) {
 		$redirect_to = wp_login_url();
@@ -218,7 +220,7 @@ class SSO {
 	/**
 	 * Update WP user with discourse user data
 	 *
-	 * @param  int $user_id the user ID.
+	 * @param int $user_id the user ID.
 	 *
 	 * @return int|\WP_Error integer if the update was successful, WP_Error otherwise.
 	 */

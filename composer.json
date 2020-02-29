@@ -1,0 +1,19 @@
+{
+	"name": "kni-labs/wp-discourse-login",
+	"description": "Custom Discourse SSO Provider implementation",
+	"type": "wordpress-plugin",
+	"support": {
+		"issues": "https://github.com/kni-labs/wp-discourse-login/issues"
+	},
+	"require-dev": {
+        "dealerdirect/phpcodesniffer-composer-installer": "*",
+        "object-calisthenics/phpcs-calisthenics-rules": "*",
+        "phpcompatibility/php-compatibility": "*",
+        "wp-coding-standards/wpcs": "*"
+	},
+	"scripts": {
+		"php:lint": "vendor/bin/phpcs -p -s",
+		"php:autofix": "vendor/bin/phpcbf --standard=WordPress",
+		"php:lint:errors": "vendor/bin/phpcs --standard=WordPress -p -s --runtime-set ignore_warnings_on_exit 1"
+	}
+}

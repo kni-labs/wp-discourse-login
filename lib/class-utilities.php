@@ -15,6 +15,8 @@ namespace WPDiscourseLogin\Utilities;
 class Utilities {
 
 
+
+
 	/**
 	 * Validates the response from `wp_remote_get` or `wp_remote_post`.
 	 *
@@ -43,7 +45,7 @@ class Utilities {
 	/**
 	 * Get a Discourse user object.
 	 *
-	 * @param int  $user_id The WordPress user_id.
+	 * @param int  $user_id        The WordPress user_id.
 	 * @param bool $match_by_email Whether or not to attempt to get the user by their email address.
 	 *
 	 * @return array|mixed|object|\WP_Error

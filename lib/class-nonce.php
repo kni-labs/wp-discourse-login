@@ -10,6 +10,8 @@ namespace WPDiscourseLogin\SSO;
 class Nonce {
 
 
+
+
 	/**
 	 * Database Verson of nonce table
 	 *
@@ -76,7 +78,7 @@ class Nonce {
 	 */
 	private function maybe_create_db() {
 		if ( version_compare( get_option( 'wpdlg_nonce_db_version', -1 ), $this->db_version ) !== 1 ) {
-			require_once ABSPATH . 'wp-admin/includes/upgrade.php';
+			include_once ABSPATH . 'wp-admin/includes/upgrade.php';
 
 			$table_name = $this->get_table_name();
 			$charset    = $this->wpdb->get_charset_collate();
@@ -143,7 +145,7 @@ class Nonce {
 	 *
 	 * @method verify
 	 *
-	 * @param  string     $nonce  the nonce to be validated.
+	 * @param string     $nonce  the nonce to be validated.
 	 * @param string|int $action Scalar value to add context to the nonce.
 	 *
 	 * @return bool
@@ -165,7 +167,7 @@ class Nonce {
 	 *
 	 * @method invalidate_nonce
 	 *
-	 * @param  int $id the nonce ID that needs to be invalidated.
+	 * @param int $id the nonce ID that needs to be invalidated.
 	 *
 	 * @return boolean
 	 */
