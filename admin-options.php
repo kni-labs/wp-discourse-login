@@ -16,7 +16,7 @@ function wpdlg_register_settings() {
 add_action( 'admin_init', 'wpdlg_register_settings' );
 
 function wpdlg_register_options_page() {
-	add_options_page( 'WP Discourse Login Settings', 'WP Discourse Login', 'manage_options', 'wp-discourse-login', 'wpdlg_option_page' );
+	add_options_page( 'WP Discourse Login Settings', 'WP Discourse Login', 'manage_network_options', 'wp-discourse-login', 'wpdlg_option_page' );
 }
 add_action( 'admin_menu', 'wpdlg_register_options_page' );
 
