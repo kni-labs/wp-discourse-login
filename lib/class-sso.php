@@ -34,7 +34,7 @@ class SSO {
 	 * @return array
 	 */
 	public function add_allowed_redirects( $hosts ) {
-		$hosts[] = parse_url( get_option( 'wpdlg_discourse_url' ) )['host'];
+		$hosts[] = wp_parse_url( get_option( 'wpdlg_discourse_url' ) )['host'];
 		return $hosts;
 	}
 
