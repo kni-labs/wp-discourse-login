@@ -143,7 +143,7 @@ class SSO {
 			);
 			$user_query_results = $user_query->get_results();
 			if ( empty( $user_query_results ) ) {
-				$user_password = wp_generate_password( 12, true );
+				$user_password = wp_generate_password( 64, true );
 
 				$user_id = wp_create_user(
 					$this->get_sso_response( 'username' ),
