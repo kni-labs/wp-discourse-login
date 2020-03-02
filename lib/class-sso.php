@@ -2,13 +2,14 @@
 /**
  *
  * SSO client
+ *
+ * @package WPDiscourseLogin
  */
+
 namespace WPDiscourseLogin\SSO;
 
 /**
  * Class SSO
- *
- * @package WPDiscourseLogin
  */
 class SSO {
 
@@ -204,6 +205,7 @@ class SSO {
 
 		wp_safe_redirect( $redirect_to );
 		exit;
+
 	}
 
 	/**

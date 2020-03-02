@@ -2,10 +2,13 @@
 /**
  * Nonce generator & validator.
  *
- * @package WPDiscourse
+ * @package WPDiscourseLogin
  */
 
 namespace WPDiscourseLogin\SSO;
+
+// phpcs:disable WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+// phpcs:disable WordPress.DB.PreparedSQL.NotPrepared
 
 /**
  * Nonce generator
