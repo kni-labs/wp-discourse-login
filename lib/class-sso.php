@@ -153,7 +153,7 @@ class SSO {
 				return $user_id;
 			}
 
-			return $user_query_results{0}->ID;
+			return $user_query_results[0]->ID;
 		}
 	}
 
