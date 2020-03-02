@@ -117,7 +117,7 @@ class SSO {
 		if ( is_user_logged_in() ) {
 			$user_id  = get_current_user_id();
 			$redirect = $this->get_sso_response( 'return_sso_url' );
-			if ( get_user_meta( $user_id, get_option( 'wpdlg_discourse_meta' ), true ) ) {
+			if ( get_user_option( $user_id, get_option( 'wpdlg_discourse_meta' ) ) ) {
 				wp_safe_redirect( $redirect );
 
 				exit;
@@ -125,7 +125,7 @@ class SSO {
 				$discourse_email = $this->get_sso_response( 'email' );
 				$wp_email        = wp_get_current_user()->user_email;
 				if ( $discourse_email === $wp_email ) {
-					update_user_meta( $user_id, get_option( 'wpdlg_discourse_meta' ), $this->get_sso_response( 'external_id' ) );
+					update_user_option( $user_id, get_option( 'wpdlg_discourse_meta' ), $this->get_sso_response( 'external_id' ) );
 					wp_safe_redirect( $redirect );
 					exit;
 				} else {
@@ -261,10 +261,10 @@ class SSO {
 
 		$update = wp_update_user( $updated_user );
 		if ( ! is_wp_error( $update ) ) {
-			update_user_meta( $user_id, 'discourse_username', $username );
+			update_user_option( $user_id, 'discourse_username', $username );
 
-			if ( ! get_user_meta( $user_id, get_option( 'wpdlg_discourse_meta' ), true ) ) {
-				update_user_meta( $user_id, get_option( 'wpdlg_discourse_meta' ), $query['external_id'] );
+			if ( ! get_user_option( $user_id, get_option( 'wpdlg_discourse_meta' ) ) ) {
+				update_user_option( $user_id, get_option( 'wpdlg_discourse_meta' ), $query['external_id'] );
 			}
 		}
 
