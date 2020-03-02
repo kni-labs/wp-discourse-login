@@ -28,16 +28,16 @@ function wpdlg_option_page() { ?>
 	<?php settings_fields( 'wpdlg_discourse_settings' ); ?>
   <h3>Discourse URL</h3>
   <p>The URL of where your Discourse Instance is hosted.</p>
-  <input type="text" id="wpdlg_discourse_url" name="wpdlg_discourse_url" value="<?php echo esc_html( get_option( 'wpdlg_discourse_url' ) ); ?>" />
+  <input type="text" id="wpdlg_discourse_url" name="wpdlg_discourse_url" value="<?php echo esc_attr( get_option( 'wpdlg_discourse_url' ) ); ?>" />
   <h3>SSO Secret</h3>
   <p>Your SSO secret. Should match secret on discourse instance</p>
-  <input type="text" id="wpdlg_discourse_secret" name="wpdlg_discourse_secret" value="<?php echo esc_html( get_option( 'wpdlg_discourse_secret' ) ); ?>" />
+  <input type="text" id="wpdlg_discourse_secret" name="wpdlg_discourse_secret" value="<?php echo esc_attr( get_option( 'wpdlg_discourse_secret' ) ); ?>" />
   <h3>Meta Key</h3>
   <p>The meta name by which this user ID will be associated to the Discourse forum</p>
-  <input type="text" id="wpdlg_discourse_meta" name="wpdlg_discourse_meta" value="<?php echo esc_html( get_option( 'wpdlg_discourse_meta' ) ); ?>" />
+  <input type="text" id="wpdlg_discourse_meta" name="wpdlg_discourse_meta" value="<?php echo esc_attr( get_option( 'wpdlg_discourse_meta' ) ); ?>" />
   <h3>API Key</h3>
   <p>The API Key of the Discourse forum</p>
-  <input type="text" id="wpdlg_discourse_api" name="wpdlg_discourse_api" value="<?php echo esc_html( get_option( 'wpdlg_discourse_api' ) ); ?>" />
+  <input type="text" id="wpdlg_discourse_api" name="wpdlg_discourse_api" value="<?php echo esc_attr( get_option( 'wpdlg_discourse_api' ) ); ?>" />
 	<?php submit_button(); ?>
   </form>
   </div>

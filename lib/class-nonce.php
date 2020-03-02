@@ -1,19 +1,16 @@
 <?php
 /**
+ * Nonce generator & validator.
  *
- * Nonce generator and validator
+ * @package WPDiscourse
  */
+
 namespace WPDiscourseLogin\SSO;
 
 /**
- * Nonce class
- *
- * @package WPDiscourseLogin
+ * Nonce generator
  */
 class Nonce {
-
-
-
 
 	/**
 	 * Database Verson of nonce table
@@ -39,21 +36,24 @@ class Nonce {
 		$this->wpdb = $wpdb;
 
 		/**
-		 * The default is set to 10 minutes
+		 * One can override the default nonce life.
+		 *
+		 * The default is set to 10 minutes, which is plenty for most of the cases
 		 *
 		 * @var int
 		 */
-		$this->nonce_life = intval( 600 );
+		$this->nonce_life = intval( apply_filters( 'wpdc_nonce_life', 600 ) );
 
 		$this->maybe_create_db();
 	}
+
 
 	/**
 	 * Singleton instance
 	 *
 	 * @method get_instance
 	 *
-	 * @return \WPDiscourse\SSOClient\Nonce       the instance.
+	 * @return \WPDiscourseLogin\SSO\Nonce       the instance.
 	 */
 	public static function get_instance() {
 		if ( is_null( self::$instance ) ) {
@@ -71,7 +71,7 @@ class Nonce {
 	 * @return string      the db name.
 	 */
 	private function get_table_name() {
-		return "{$this->wpdb->prefix}wpdlg_nonce";
+		return "{$this->wpdb->prefix}discourse_nonce";
 	}
 
 	/**
@@ -80,8 +80,8 @@ class Nonce {
 	 * @method maybe_create_db
 	 */
 	private function maybe_create_db() {
-		if ( version_compare( get_option( 'wpdlg_nonce_db_version', -1 ), $this->db_version ) !== 1 ) {
-			include_once ABSPATH . 'wp-admin/includes/upgrade.php';
+		if ( version_compare( get_option( 'wpdiscourse_nonce_db_version', -1 ), $this->db_version ) !== 1 ) {
+			require_once ABSPATH . 'wp-admin/includes/upgrade.php';
 
 			$table_name = $this->get_table_name();
 			$charset    = $this->wpdb->get_charset_collate();
@@ -96,7 +96,7 @@ class Nonce {
 				) $charset;"
 			);
 
-			update_option( 'wpdlg_nonce_db_version', $this->db_version );
+				update_option( 'wpdiscourse_nonce_db_version', $this->db_version );
 		}
 
 		$this->purge_expired_nonces();
@@ -148,7 +148,7 @@ class Nonce {
 	 *
 	 * @method verify
 	 *
-	 * @param string     $nonce  the nonce to be validated.
+	 * @param  string     $nonce  the nonce to be validated.
 	 * @param string|int $action Scalar value to add context to the nonce.
 	 *
 	 * @return bool
@@ -170,7 +170,7 @@ class Nonce {
 	 *
 	 * @method invalidate_nonce
 	 *
-	 * @param int $id the nonce ID that needs to be invalidated.
+	 * @param  int $id the nonce ID that needs to be invalidated.
 	 *
 	 * @return boolean
 	 */
