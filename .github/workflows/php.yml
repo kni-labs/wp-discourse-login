@@ -20,7 +20,7 @@ jobs:
     # Docs: https://getcomposer.org/doc/articles/scripts.md
 
     - name: Run linting on lib
-      run: composer php:lint lib
+      run: composer php:lint:errors lib
    
     - name: Run linting on main file
-      run: composer php:lint wp-discourse-login.php
+      run: composer php:lint:errors wp-discourse-login.php
