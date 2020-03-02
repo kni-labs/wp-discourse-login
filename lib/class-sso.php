@@ -44,14 +44,14 @@ class SSO {
 			return;
 		}
 
-		$updated_user = update_user( $user_id );
+		$updated_user = $this->update_user( $user_id );
 		if ( is_wp_error( $updated_user ) ) {
-			handle_errors( $updated_user );
+			$this->handle_errors( $updated_user );
 
 			return;
 		}
 
-		auth_user( $user_id );
+		$this->auth_user( $user_id );
 	}
 
 	/**
