@@ -20,9 +20,22 @@ class SSO {
 	 */
 	public function __construct() {
 		add_action( 'init', array( $this, 'parse_request' ), 5 );
-
 		add_filter( 'query_vars', array( $this, 'discourse_sso_custom_query_vars' ) );
 		add_action( 'parse_query', array( $this, 'discourse_sso_url_redirect' ) );
+
+		add_filter( 'allowed_redirect_hosts', array( $this, 'add_allowed_redirects' ) );
+
+	}
+
+	/**
+	 * Adds the configured WP Discourse URL to the list of allowed hosts
+	 *
+	 * @param array $hosts allowed redirect hosts.
+	 * @return array
+	 */
+	public function add_allowed_redirects( $hosts ) {
+		$hosts[] = parse_url( get_option( 'wpdlg_discourse_url' ) )['host'];
+		return $hosts;
 	}
 
 	/**
@@ -93,7 +106,7 @@ class SSO {
 		);
 
 		$sso_login_url = get_option( 'wpdlg_discourse_url' ) . '/session/sso_provider?' . http_build_query( $request );
-		wp_redirect( esc_url_raw( $sso_login_url ) );
+		wp_safe_redirect( esc_url_raw( $sso_login_url ) );
 		exit;
 	}
 
@@ -202,7 +215,6 @@ class SSO {
 		do_action( 'wp_login', $query['username'], $user );
 
 		$redirect_to = $query['return_sso_url'];
-
 		wp_safe_redirect( $redirect_to );
 		exit;
 
