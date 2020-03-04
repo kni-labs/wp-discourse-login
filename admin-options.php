@@ -4,13 +4,9 @@
  */
 
 function wpdlg_register_settings() {
-	add_option( 'wpdlg_discourse_url', 'Discourse URL' );
 	register_setting( 'wpdlg_discourse_settings', 'wpdlg_discourse_url' );
-	add_option( 'wpdlg_discourse_secret', 'Discourse Secret' );
 	register_setting( 'wpdlg_discourse_settings', 'wpdlg_discourse_secret' );
-	add_option( 'wpdlg_discourse_meta', 'Discourse Meta Key' );
 	register_setting( 'wpdlg_discourse_settings', 'wpdlg_discourse_meta' );
-	add_option( 'wpdlg_discourse_meta', 'Discourse API Key' );
 	register_setting( 'wpdlg_discourse_settings', 'wpdlg_discourse_api', array('sanitize_callback' => 'sanitize_key') );
 }
 add_action( 'admin_init', 'wpdlg_register_settings' );
