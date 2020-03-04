@@ -22,9 +22,10 @@ class SSO {
 		add_action( 'init', array( $this, 'parse_request' ), 5 );
 		add_filter( 'query_vars', array( $this, 'discourse_sso_custom_query_vars' ) );
 		add_action( 'parse_query', array( $this, 'discourse_sso_url_redirect' ) );
-
 		add_filter( 'allowed_redirect_hosts', array( $this, 'add_allowed_redirects' ) );
-
+		add_action( 'get_wpdlg_name', array( $this, 'get_wpdlg_name' ) );
+		add_action( 'get_wpdlg_avatar', array( $this, 'get_wpdlg_avatar' ) );
+		add_action( 'get_wpdlg_profile_link', array( $this, 'get_wpdlg_profile_link' ) );
 	}
 
 	/**
@@ -291,4 +292,57 @@ class SSO {
 		return sanitize_text_field( $sig );
 	}
 
+	/**
+	 * Gets the username of the Discourse user
+	 *
+	 * @return string the username, otherwise empty.
+	 */
+	public static function get_wpdlg_name() {
+		global $current_user;
+		wp_get_current_user();
+		$discourse_user = \WPDiscourseLogin\Utilities\Utilities::get_discourse_user( $current_user->ID, true );
+		if ( ! is_wp_error( $discourse_user ) ) {
+			return $discourse_user->username;
+		}
+		return '';
+	}
+
+	/**
+	 * Gets the avatar of the Discourse user
+	 *
+	 * @return string the URL to the avatar, otherwise an empty string.
+	 */
+	public static function get_wpdlg_avatar() {
+
+		global $current_user;
+		wp_get_current_user();
+		$discourse_user = \WPDiscourseLogin\Utilities\Utilities::get_discourse_user( $current_user->ID, true );
+		if ( ! is_wp_error( $discourse_user ) ) {
+			$avatar = $discourse_user->avatar_template;
+
+			if ( ! preg_match( '/^http/', $avatar ) ) {
+				return str_replace( '{size}', '42', get_option( 'wpdlg_discourse_url' ) . $avatar );
+			} else {
+				return str_replace( '{size}', '42', $avatar );
+			}
+		}
+		return '';
+
+	}
+
+	/**
+	 * Gets the Discourse profile link of the current user
+	 *
+	 * @return string the URL to the users profile.
+	 */
+	public static function get_wpdlg_profile_link() {
+
+		$username = self::get_wpdlg_name();
+
+		return get_option( 'wpdlg_discourse_url' ) . '/u/' . $username;
+
+	}
+
 }
+
+
