@@ -39,7 +39,3 @@ function wpdlg_option_page() { ?>
   </div>
 	<?php
 }
-
-function wpdlg_sanitize_url(){
-
-}
