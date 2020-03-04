@@ -11,7 +11,7 @@ function wpdlg_register_settings() {
 	add_option( 'wpdlg_discourse_meta', 'Discourse Meta Key' );
 	register_setting( 'wpdlg_discourse_settings', 'wpdlg_discourse_meta' );
 	add_option( 'wpdlg_discourse_meta', 'Discourse API Key' );
-	register_setting( 'wpdlg_discourse_settings', 'wpdlg_discourse_api' );
+	register_setting( 'wpdlg_discourse_settings', 'wpdlg_discourse_api', array('sanitize_callback' => 'sanitize_key') );
 }
 add_action( 'admin_init', 'wpdlg_register_settings' );
 
@@ -42,4 +42,8 @@ function wpdlg_option_page() { ?>
   </form>
   </div>
 	<?php
+}
+
+function wpdlg_sanitize_url(){
+
 }

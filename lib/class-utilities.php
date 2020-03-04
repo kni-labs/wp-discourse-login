@@ -122,7 +122,7 @@ class Utilities {
 			$url,
 			array(
 				'headers' => array(
-					'Api-Key'      => sanitize_key( $api_key ),
+					'Api-Key'      => $api_key,
 					'Api-Username' => 'system',
 				),
 			)
