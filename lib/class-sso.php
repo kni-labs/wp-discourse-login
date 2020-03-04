@@ -93,7 +93,7 @@ class SSO {
 		$redirect_to = home_url( '/' );
 
 		$payload_new = base64_encode(
-			http_build_query(
+			add_query_arg(
 				array(
 					'nonce'          => Nonce::get_instance()->create( '_discourse_sso' ),
 					'return_sso_url' => utf8_uri_encode( $redirect_to ),
